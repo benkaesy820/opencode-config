@@ -28,6 +28,7 @@ Last updated: 2026-10-21.
 ## How he wants to be talked to
 
 - Give the recommendation you actually hold, with the reason. Do not present a menu.
+- Uses session forks as parallel branches: the main thread keeps working while a fork takes a different job (stated 2026-10-21).
 - Be willing to propose something he did not ask for when it solves the problem better — say why, and what it costs to switch.
 - Concise. Speak only when there is something to say.
 - Plain words, not simplified thinking: keep the terms that carry meaning, explain unfamiliar ones once, never soften a real constraint.

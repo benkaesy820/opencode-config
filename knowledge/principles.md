@@ -12,3 +12,4 @@ The rules his decisions already follow. Apply them when judging an idea, and nam
 8. **The agent's surface is the product.** An agent should never need the shell for something a tool can do. If it does, the tool is missing something.
 9. **Fix the class, not the instance.** One symptom appearing twice is a structural problem, not two bugs.
 10. **Never invent product behaviour.** Prices, limits, roles, permissions, guarantees: if it is unknown, say it is the user's call.
+11. **Inherit, do not restate.** An agent's own config must not repeat what the global config already owns, and order matters: a blanket allow placed after the asks overrides them (2026-10-21, commit ade7fb7).
