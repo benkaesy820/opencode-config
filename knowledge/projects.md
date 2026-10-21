@@ -9,6 +9,8 @@
 - Open (2026-10-21, verified in the dev tree): the M3 fallback control page — one-flow's last residue: owner state, hold/resume, last N events, no preview frames (`docs/mcp-plan.md`, `docs/one-flow.md`). How often the in-page ownership bar actually fails to install is still unmeasured.
 - Closed 2026-10-21: read/eval contract tests and the 40k-node walk budget (commit 9580e5e, `tests/contract/read-eval.test.ts`); the benchmark runs in CI (`.github/workflows/ci.yml`); MCP frontends are byte relays to the daemon's MCP pipe, so the relay no longer dies with the daemon.
 - Closed 2026-10-21 (main at a44a59d, pushed, tree clean): the relay recovers a dead daemon — it restarts it, reconnects, and ignores events from the socket it replaced; swallowed failures surfaced (stop failure, MCP connect failure, dead catch); the markdown renderer now emits text nodes and keeps anchor hrefs; `browser_js` reports itself as a mutation.
+- 2026-10-21 (commit c4f55c4): the ownership bar is measured. `browser_diagnostics` reports `ownershipBar` per tab and per session — attempts, installs, failures, removals, deliberate skips (challenge, headless) and failure reasons (inject-error, not-installed). An install is verified in the page, not assumed; a deliberate skip is never a failure. This is the instrument the M3 fallback page was gated on; the number itself still has to be collected from real use.
+- The headed suite (`BRIDGE_TEST_HEADED=1`) had been skipped since the pointer and the bar were restyled, so two assertions still described the old 18x24 arrow and the old chip copy. Proven stale by running the suite at HEAD with the change reverted, then repaired. Without that flag `test:integration` silently skips 5 tests, so a green run says nothing about them.
 - Upstream 0.5.0 (React viewer + continuous screencast) stays reachable at `origin/backup/main-0.5.0-2026-10-21`; it was removed on purpose in 6b6e3f8.
 - Care: `D:` has lost files once and pnpm's store links broke. Keep the working copy on `C:`; treat `D:` as a mirror.
 
@@ -26,6 +28,10 @@
 
 ## Windows environment
 
+- 2026-10-21: telemetry blocked machine-wide. Office: connected experiences off (privacy = 2), diagnostic data off (sendtelemetry = 3, DisableTelemetry = 1), customer data and feedback off, first-run movie and opt-in suppressed, set at both HKLM and HKCU.
+- Windows: AllowTelemetry = 0, WER disabled, CEIP policy 0, DiagTrack and dmwappushservice disabled, and five telemetry scheduled tasks disabled (Compatibility Appraiser Exp, CEIP Consolidator, UsbCeip, SustainabilityTelemetry, Office Performance Monitor).
+- Edge: AllowTelemetry, DiagnosticData and Edge3PSerpTelemetryEnabled = 0, BackgroundModeEnabled = 0. An earlier debloat pass had already set SmartScreenEnabled = 0 and a wide feature-off set; that was pre-existing and left untouched.
+- Rollback and the pre-change registry exports live in `C:\Users\BenKaesy\Documents\telemetry-rollback-2026-10-21\` (run `rollback.ps1` elevated).
 - Windows Terminal in a Tabby-like theme: Tabby dark and light schemes, auto-switching with the OS theme, Cascadia Code, ligatures off, opaque, no acrylic.
 - PowerShell prompt: lean powerline, light and dark aware, with git state and an ownership bar.
 - US keyboard layout.
