@@ -1,0 +1,8 @@
+# Normalize line endings on commit, keep files as written in the working tree.
+# These files are read by an AI agent, not compiled; consistent endings keep
+# diffs readable across editors.
+* text=auto
+
+*.md  text eol=lf
+*.json text eol=lf
+*.jsonc text eol=lf

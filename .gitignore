@@ -1,0 +1,19 @@
+# Machine-local service registration. Contains a service credential; not
+# portable, not worth versioning, and never safe to commit.
+service.json
+
+# Local dependency install (OpenCode plugins/tooling); rebuilt, never versioned.
+node_modules/
+
+# Session and runtime state, if OpenCode ever places any here.
+storage/
+state/
+*.log
+
+# Credentials must never reach this repo.
+*.env
+*.env.*
+!.env.example
+
+# Local backup copies of the skill set; recoverable from history, not worth versioning.
+skills-archive/
