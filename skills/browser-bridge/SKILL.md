@@ -115,8 +115,9 @@ Check the installed version and effective config — other versions and publishe
 schema examples differ. `mcp add` consumed child flags in the tested setup, so
 JSON configuration is the working route. In 2.0.32 an edit to this file took
 effect live: opencode killed the old MCP processes and respawned the frontends
-within a second, and the new catalog (11 tools, including `browser_storage`)
-appeared with no restart. If the catalog still looks stale, `opencode service
+within a second, and the new catalog (13 tools, including `browser_storage`,
+`browser_read` and `browser_js`) appeared with no restart. If the catalog still
+looks stale, `opencode service
 restart` — get approval first, since it disrupts a running service.
 
 Then reconnect and inspect the live tool catalog, and make one harmless call.
@@ -201,7 +202,7 @@ all fields and bounds; unknown arguments are rejected.
 | Tool | Use |
 | --- | --- |
 | `browser_start` | Create a session; optional `url`, `workspace`, `profile`. |
-| `browser_observe` | Read state: `controls`, `summary`, `delta` (with `baseRevision`), `visual`, `inspect` (one `ref`), or `read` (the page as text, markdown, links, or html). |
+| `browser_observe` | Read state: `controls`, `summary`, `delta` (with `baseRevision`), `visual`, `inspect` (one `ref`). |
 | `browser_read` | The page itself as `text`, `markdown`, `links`, or `html`, with a `limit`. Use it when the answer is in the page, not in the controls — it bypasses the observation cap and returns every link with its href. |
 | `browser_js` | Evaluate an expression in the page and get the result back as JSON. The escape hatch when no typed tool expresses the question. |
 | `browser_act` | One typed action, with optional postcondition and capture. |
@@ -334,9 +335,10 @@ pin with `free` and no size arguments.
 
 ### If the MCP server will not connect
 
-The MCP frontend is a thin relay to the daemon. If the daemon is stopped while
-the frontend is running, the frontend exits too, and the host may keep the
-server marked failed instead of respawning it.
+The MCP frontend is a thin relay to the daemon. The relay reattaches: when the
+daemon stops or restarts, the frontend brings it back, reconnects, and keeps
+serving, so a daemon restart no longer takes the tool off the table. A
+frontend that still dies belongs to an older build.
 
 - `opencode mcp list` shows the truth: `✗ browser-bridge failed: ... exited
   with code 1`. The frontend itself is fine - start it by hand and it answers
