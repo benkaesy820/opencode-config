@@ -156,7 +156,8 @@
                         }
                     ],
     "plugins":  [
-                    "opencode-cmd-provider",
-                    "@prevalentware/opencode-goal-plugin"
-                ]
+      "opencode-cmd-provider",
+      "@prevalentware/opencode-goal-plugin",
+      "@kerneloops/opencode-session-tools"
+    ]
 }
