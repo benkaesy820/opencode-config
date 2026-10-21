@@ -168,7 +168,7 @@ You may follow a signal outside the asked scope — that is how some of the wors
 
 ## 13. Severity rubric
 
-One scale everywhere, so mixed reports stay comparable:
+Use the subject skill's scale. Only when the subject has none, use this:
 
 | Level | Anchor |
 | --- | --- |
@@ -177,7 +177,7 @@ One scale everywhere, so mixed reports stay comparable:
 | **Low** | Hygiene, operations, documentation drift, degraded-but-working behavior. |
 | **Info** | Policy questions and decisions with no defect. |
 
-`code-review`'s scale maps on: Blocker ≈ High; Should fix ≈ Medium; Consider ≈ Low; Nit stays cosmetic. Severity is impact × reachability, never alarm. Record the trigger, not just the level.
+Severity is impact × reachability, never alarm. Record the trigger, not just the level.
 
 ## 14. Report
 

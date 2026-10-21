@@ -5,7 +5,7 @@ description: Load this first for any non-trivial task — anything spanning more
 
 # Workflow
 
-Lifecycle, risk model, routing, gates, and the optional Project Brain. Load this before editing in unfamiliar territory or for any task touching more than a couple of files.
+Lifecycle, risk model, routing, gates, and where decisions live. Load this before editing in unfamiliar territory or for any task touching more than a couple of files.
 
 ## 1. Lifecycle
 
@@ -92,21 +92,14 @@ State the level and the reason in one line before starting a `CRITICAL` task.
 
 Report unrun checks as `UNVERIFIED`. Never upgrade an assumption into a result.
 
-## 5. Optional Project Brain
+## 5. Memory across sessions
 
-Skip entirely unless the task spans sessions or the user asks.
+Decisions survive in two places, and nowhere else:
 
-Useful only when: decisions made in one session must survive into another, and the working tree cannot carry that context.
+- **Project decisions** go in that project's own `AGENTS.md` (`AGENTS.md` section 2). The repository and its git history already hold the rest.
+- **Standing personal decisions** go in the knowledge base, `~/.config/opencode/knowledge/`, which the advisor maintains.
 
-When it applies:
-
-1. Keep decisions, not activity. Record what was decided and why, not which files were touched.
-2. One short file per project, at the project root, clearly marked as agent notes.
-3. Entry shape: context, decision, rationale, rejected alternatives, revisit-if.
-4. Delete entries that are wrong or superseded rather than appending contradictions.
-5. Never record secrets, tokens, customer data, or credentials.
-
-An entry that duplicates the code, the tests, or git history is waste. The repository already stores those.
+Do not start a third copy. An entry that duplicates the code, the tests, or git history is waste.
 
 ## 6. Blocking and asking
 
@@ -117,9 +110,7 @@ Ask the user directly when:
 - A requirement contradicts itself.
 - Authorization is missing for anything irreversible or customer-visible.
 
-Do not ask when a small inference is defensible. Make it, state it in one line, and proceed.
-
-Load the `architect-decisions` skill instead of asking the user when the question is a contract or design decision with several defensible answers.
+Everything else: make the smallest defensible inference, state it in one line, and proceed (`AGENTS.md` section 3). A contract or design decision with several defensible answers goes to `architect-decisions`, not to the user.
 
 ## 7. When code cannot be run
 

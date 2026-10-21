@@ -35,7 +35,7 @@ The coverage ledger for UI: screens × states × breakpoints × input modes. Eve
 
 **Craft and consistency** — count the colors, radii, and spacings actually in use; drift from the system is a finding. Hierarchy via the squint test: blur a screenshot — can you still name the three most important things? Alignment and spacing rhythm.
 
-**States** — every interactive surface has idle / loading / empty / error / disabled / overflow designed and rendered. A missing state is a finding, not a nit.
+**States** — every interactive surface needs its states designed and rendered. A missing state is a finding, not a nit.
 
 **Usability** — walk the primary job end to end as a first-time user. Friction, affordances, error recovery ("what broke, what comes next"), destructive-action treatment, empty states that teach.
 

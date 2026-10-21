@@ -74,12 +74,11 @@ Work outward from highest consequence.
 - Comments that narrate a change, instruct a future agent without an owner, or are now wrong are defects, not style. `documentation` owns that judgment and the historical-exception rule; judge against it here.
 
 **Dead code**
-- Zero references, verified across the whole repository including tests, re-exports through `__init__` or barrel files, entry points in a manifest, decorators, and framework registration.
 - A dependency declared in the manifest but absent from the source tree.
 - A flag, config key, or environment variable with only one value ever used.
 - A dependency superseded by something else in the tree.
 
-Dead code is a claim that must be demonstrated, not inferred from a failed search. Dynamic resolution defeats grep: `getattr`, `import()`, string-keyed registries, plugin discovery, and framework conventions all reference code without a literal symbol match. If you cannot rule those out, the item goes under `Unverified`, never under confirmed dead.
+Dead code is a claim that must be demonstrated, not inferred from a failed search. Dynamic resolution defeats grep: `getattr`, `import()`, string-keyed registries, plugin discovery, and framework conventions all reference code without a literal symbol match. If you cannot rule those out, the item goes under `Unverified`, never under confirmed dead. The exhaustive search is in *Dead code and bloat removal* below.
 
 **Tests**
 - Does the test assert the behavior, or only that it ran? Would it fail if the change were reverted? Was a valid assertion weakened to get green? `testing` owns the bar.

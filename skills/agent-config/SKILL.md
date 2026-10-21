@@ -30,8 +30,7 @@ The agent's configuration is executable documentation: it decides what the agent
 1. **Back up the file** outside the directory the tool scans.
 2. **Make the smallest edit that achieves the intent** — a routing row, one bullet, one reference.
 3. **Keep the file's voice and formatting.** These files are read by a model; consistency is part of their function.
-4. **Verify it loads.** List the skills, read the file back, reload the catalog if the tool supports it. A config change that silently fails to load is indistinguishable from one that never happened.
-5. **Say what is now different**, in one line.
+4. **Say what is now different**, in one line.
 
 ## 5. Anatomy of a good skill
 
