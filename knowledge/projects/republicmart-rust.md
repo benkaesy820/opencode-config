@@ -152,3 +152,5 @@
 - 2026-10-28: **the seller's earnings read done** (subagent, commit `c1584ef`): `GET /seller/earnings` — per order: amount, paid out (`payout_items`), owed (the seller account's ledger balance for that order, negated, floored at zero), plus totals; newest 50, no pagination. 263 tests.
 - 2026-10-28: **a real ledger-identity defect found by that slice and fixed** (commit `8b284ce`): `accounts.owner_user_id` references **users**, and the capture/payout/refund writers were passing `sellers.id` — masked because the fixtures and dev data have seller 1 = user 1. The posting is now keyed by the seller's **user id**; the payout row/items/response stay keyed by the shop id. Test uses seller 2 owned by user 5.
 
+
+- 2026-10-28 — republicmart-rust: the seller's share codes have `GET/POST /seller/share-codes` and `PATCH /seller/share-codes/{id}`; `used_count` stays 0 until checkout increments it.
