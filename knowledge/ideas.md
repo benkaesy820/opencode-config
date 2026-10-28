@@ -36,6 +36,18 @@ One entry per idea. Verdict first, then the reason, then what to do first. Updat
 - 2026-10-21 — before building it, count overlay-injection failures in real use. Zero means build nothing and document the CLI path instead.
 - Revisit if: the agent surface is solid AND the product direction changes — remote or headless use returns, or the human genuinely cannot watch the shared window.
 
+## A from-scratch Rust "cognitive" model on the laptop
+
+- 2026-10-25 — **parked.** Built, measured, and then stopped by Ben's decision; the project directory is deleted. The idea, the architecture, every measurement and the resume list live in `cognitive.md` in this directory; the code is archived at `~/cognitive-2026-10-25.tar.gz`. Nothing here is running — do not treat it as live work.
+
+## Rebuild the marketplace backend in Rust
+
+- 2026-10-26 — **decided: build it.** Ben chose a greenfield Rust rebuild of the republic-mart backend, the TypeScript one treated as nonexistent, with **footprint as the dominant goal** (it must fit the Northflank box: 0.1 shared vCPU, 256 MB). The database stays Turso; the Rust `libsql` client path is already proven working locally.
+- The reason that survives scrutiny is not "Rust is fast" — it is that the current production image is a Node runtime plus a 345 MB dependency tree plus sharp plus ffmpeg, which is the real waste. A musl-static Rust binary with no bundled SQLite lands around 5–12 MB and tens of MB RSS.
+- The reason it is *not* a port: the TypeScript backend is 58,665 lines over 106 files, 60 tables, 773 route registrations and 59 test files, and it was hardened on 2026-10-24/25 (email builders, order/delivery/dispute state machines, idempotency, money paths). Porting it would re-derive behaviour that is already right and risks drift exactly where the money is. A fresh build with the domain written down first is cheaper than a port and safer than a rewrite-in-place.
+- The speed claim has to be kept honest: catalogue p99 is SQLite plus R2 plus the Moolre and Brevo round trips, so a faster CPU moves it 20–30%. The wins that move it are an in-process catalogue read model, one round trip per transaction, and instance sizing.
+- Revisit if: the first vertical slice fails to hit the footprint budget, or the Turso round trip from the box measures worse than expected.
+
 ## Standing answers
 
 - "Do I need a plugin for this?" — No, until there is a hook the skill system cannot express.

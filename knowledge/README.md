@@ -10,6 +10,7 @@ What Ben is, how he works, what he is building, and what has already been decide
 | `principles.md` | The rules his decisions already follow, and how to apply them |
 | `projects.md` | What is being built and where each thing stands |
 | `ideas.md` | The idea log: what was proposed, what was decided, what to revisit |
+| `cognitive.md` | A parked project, kept whole: the idea, the measurements and how to resume it |
 
 ## Rules for what goes in
 

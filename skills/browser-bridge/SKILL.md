@@ -19,10 +19,13 @@ settings untouched.
 ### Toolchain
 
 Keep the **tool checkout** apart from the **active workspace** (the user's
-project). On this machine the tool checkout is `C:\BrowserX-AgenticBrowser`
-(what the MCP server runs) and the project itself lives at
-`D:\Project\BrowserX-AgenticBrowser` (where changes are developed, then
-pushed). The checkout is a clone and may be absent after a cleanup — a
+project). On this machine (CachyOS Linux) the tool checkout is
+`~/BrowserX-AgenticBrowser` (what the MCP server runs) and the development
+clone lives on the backup drive at
+`/run/media/benkaesy/BackUP/Project/BrowserX-AgenticBrowser` (where changes
+are developed, then pushed). The backup drive mounts on demand, so the server
+must never point at it. The checkout is a clone and may be absent after a
+cleanup — a
 missing checkout means the MCP server cannot start at all. Clone
 `https://github.com/benkaesy820/browser-bridge.git` into an unused tool
 directory if it is gone; never overwrite or reset existing work.
@@ -91,10 +94,10 @@ host cannot resolve `node`. On this machine the effective file is
     "servers": {
       "browser-bridge": {
         "type": "local",
-        "command": ["node", "C:\\BrowserX-AgenticBrowser\\packages\\cli\\dist\\cli.js", "mcp", "--stdio"],
+        "command": ["/usr/bin/node", "/home/benkaesy/BrowserX-AgenticBrowser/packages/cli/dist/cli.js", "mcp", "--stdio"],
         "environment": {
           "BRIDGE_LOG_LEVEL": "warn",
-          "BRIDGE_BROWSER": "msedge"
+          "BRIDGE_BROWSER": "bundled"
         }
       }
     }
@@ -173,11 +176,19 @@ even branded Edge — can sit in the "Performing security verification" loop. Th
 supported fix is **attach mode**: start the browser yourself, then connect to it.
 
 ```powershell
-# Run from the tool checkout (on this machine: C:\BrowserX-AgenticBrowser).
-# That folder is the only place the helper is shipped — the skill itself does
-# not carry a copy.
+# Windows: run from the tool checkout. That folder is the only place the helper
+# is shipped — the skill itself does not carry a copy.
 powershell -ExecutionPolicy Bypass -File scripts\win\start-edge-debug.ps1
 # then: --attach http://127.0.0.1:9222  (or BRIDGE_CDP in the MCP environment)
+```
+
+On Linux there is no helper script (`scripts/` ships only `win/`). Start any
+Chromium-based browser with a debugging port and attach to it:
+
+```sh
+"$HOME/.cache/ms-playwright/chromium-1148/chrome-linux/chrome" \
+  --remote-debugging-port=9222 --user-data-dir="$HOME/.cache/bridge-attach" &
+# then: --attach http://127.0.0.1:9222
 ```
 
 Attaching uses that browser's real profile, opens its sessions as tabs, closes
@@ -340,6 +351,14 @@ daemon stops or restarts, the frontend brings it back, reconnects, and keeps
 serving, so a daemon restart no longer takes the tool off the table. A
 frontend that still dies belongs to an older build.
 
+- On Linux, `daemon start` failing with `EACCES: permission denied
+  /tmp/browser-bridge/mcp.sock` means the rendezvous directory was absent (a
+  fresh `/tmp` after a reboot). The checkout now creates it before binding.
+  A daemon left over from an older build keeps serving an unlinked socket
+  after `/tmp/browser-bridge` is deleted, and later starts fail to become
+  healthy in confusing ways — kill leftover `node .../dist/cli.js daemon start`
+  processes before retrying. Kill by PID (`pgrep -x node` + `/proc/<pid>/cmdline`):
+  a `pkill -f` pattern can match the shell running it.
 - `opencode mcp list` shows the truth: `✗ browser-bridge failed: ... exited
   with code 1`. The frontend itself is fine - start it by hand and it answers
   an `initialize` request in well under a second.

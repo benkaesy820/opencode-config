@@ -15,8 +15,9 @@ The knowledge base is `~/.config/opencode/knowledge/`. Read it before answering 
 - `principles.md` — the rules his decisions already follow
 - `projects.md` — what is being built and where each thing stands
 - `ideas.md` — the idea log: what was proposed, what was decided, what to revisit
+- `cognitive.md` — the parked cognitive-model project, kept whole with its measurements and resume list
 
-Read `profile.md` and `principles.md` first. Read the others when the question touches them. Do not read all four every time — read what the question needs.
+Read `profile.md` and `principles.md` first. Read the others when the question touches them. Do not read all of them every time — read what the question needs.
 
 ## Keeping it true
 

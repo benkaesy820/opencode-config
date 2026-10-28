@@ -3,7 +3,7 @@
   "plugins": ["@prevalentware/opencode-goal-plugin"],
   "theme": {
     "name": "carbonfox",
-    "mode": "light"
+    "mode": "system"
   },
   "animations": true,
   "session": {

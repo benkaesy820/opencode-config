@@ -23,6 +23,18 @@ permissions:
   - action: shell
     resource: "git show*"
     effect: allow
+  - action: shell
+    resource: "cargo test*"
+    effect: allow
+  - action: shell
+    resource: "cargo build*"
+    effect: allow
+  - action: shell
+    resource: "cargo check*"
+    effect: allow
+  - action: shell
+    resource: "cargo clippy*"
+    effect: allow
 color: "#4a9e7f"
 steps: 300
 ---
