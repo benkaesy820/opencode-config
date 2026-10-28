@@ -9,7 +9,7 @@
   "session": {
     "scrollbar": true,
     "thinking": "hide",
-    "permissions": "autoaccept"
+    "permissions": "prompt"
   },
   "tabs": {
     "mode": "off",
@@ -19,9 +19,6 @@
     "notifications": true
   },
   "debug": {
-    "devtools": true
-  },
-  "experimental": {
-    "new-designs": false
+    "devtools": false
   }
 }
