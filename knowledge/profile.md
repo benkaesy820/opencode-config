@@ -13,7 +13,7 @@ Last updated: 2026-10-28.
 ## What he is working on
 
 - `browser-bridge` — an agentic browser driven over MCP: one visible browser shared by a human and an agent, typed tools, human takeover. See `projects.md`.
-- The agent's own configuration — skills, `AGENTS.md`, agent definitions. `opencode-config` is a checkout again since 2026-10-28; commits `fa41317`, `9841a8f`, `8e31e4d` are local, not pushed.
+- The agent's own configuration — skills, `AGENTS.md`, agent definitions. `opencode-config` is a checkout again since 2026-10-28; commits `fa41317`, `9841a8f`, `8e31e4d`, `dc24c52` are local, not pushed.
 - Superseded 2026-10-23: Windows environment work — Windows Terminal theme, PowerShell prompt, keyboard layout.
 - 2026-10-23: Linux environment work — niri keybinds, Foot terminal, display scale, package hygiene.
 
