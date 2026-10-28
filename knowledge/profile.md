@@ -29,6 +29,7 @@ Last updated: 2026-10-28.
 - 2026-10-27: one browser — Helium (`helium-browser-bin`, Chromium fork); Firefox uninstalled entirely at his request and every browser default verified pointing at Helium.
 - Changes must be reversible, with the rollback stated.
 - Evidence over assertion: executed beats reproduced beats traced beats read. "Unverified" is an honest answer.
+- 2026-10-28: trusts the model to follow the written rules; the permission list is a backstop for the catastrophic class, not a sandbox.
 - Superseded 2026-10-23: prefers Edge over Playwright's bundled Chromium — the installed browser, used as-is. On Linux the bridge only ships bundled Chromium, and that is accepted.
 - Superseded 2026-10-23: prefers Windows Terminal to be the default terminal where possible.
 
