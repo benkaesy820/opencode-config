@@ -41,13 +41,14 @@ Load one primary skill. Add a supporting skill only when that area is actually t
 | Building new UI or reshaping an existing one: aesthetic direction, typography, palette, layout | `frontend-design` | `api-design` for forms backed by an endpoint |
 | Reviewing UI, UX, or design quality: usability, accessibility, states, responsive, copy | `design-audit` | `browser-bridge` for evidence; `frontend-design` for the quality bar |
 | Operate a website or test a local app in a real browser | `browser-bridge` | none |
-| Changing how a running machine or an installed app behaves or looks: theming, shell prompts, registry or app settings, startup cost, keyboard layout, default apps | `live-system` | `frontend-design` when the look itself is the deliverable |
+| Changing how a running machine or an installed app behaves or looks: theming, shell prompts, app settings, compositor or D-Bus config, startup cost, keyboard layout, default apps | `live-system` | `frontend-design` when the look itself is the deliverable |
 | Changing the agent's own configuration: AGENTS.md, skills, plugins, MCP servers, model routing | `agent-config` | none |
+| How OpenCode itself works: config schema, CLI, API, SDK, plugin API | `opencode` | `agent-config` only when changing Ben's configuration |
 | Unclear category | this skill alone | none |
 
 Rules:
 
-- Do not load skills speculatively. Two skills is normal; more than three means the task is underspecified.
+- Do not load skills speculatively. Two skills is normal; three is the ceiling for a single-domain task; a composite audit may need four.
 - `frontend-design` is not speculative when new UI is being built or an existing one reshaped. It does not apply to a one-line bug fix, a copy change, or a purely behavioral edit to existing markup.
 - If the task turns out to be a different shape mid-flight, reload rather than accumulating skills.
 - Skills are advisory procedure, not permission. They never widen what the user authorized.

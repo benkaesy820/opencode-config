@@ -8,7 +8,8 @@ What Ben is, how he works, what he is building, and what has already been decide
 | --- | --- |
 | `profile.md` | The person: environment, taste, working style, what he likes and dislikes |
 | `principles.md` | The rules his decisions already follow, and how to apply them |
-| `projects.md` | What is being built and where each thing stands |
+| `projects.md` | The index: one file per project under `projects/` |
+| `projects/` | One file per project: what is built, where it stands, decisions and rollback paths |
 | `ideas.md` | The idea log: what was proposed, what was decided, what to revisit |
 | `cognitive.md` | A parked project, kept whole: the idea, the measurements and how to resume it |
 

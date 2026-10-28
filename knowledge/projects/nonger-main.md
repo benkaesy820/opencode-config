@@ -1,0 +1,9 @@
+## nonger-main
+
+- Local copy at `~/Projects/nonger-main` (127 MB). It also exists twice on the backup drive (`BackUP/Project/nonger-main` and the same path nested again) — duplication from the Windows transfer, not resolved.
+- Stack: npm `backend` (`nonger_enterprise`, 6 deps) + `frontend` (React/Vite, `frontend`), plus a **Tauri 2 desktop shell** in `frontend/src-tauri` (`nonger-enterprise-desktop` 1.7.9).
+- 2026-10-23: `npm ci` in both packages — backend 115 MB / 26 packages, frontend 365 MB / 221 packages. Frontend web build passes (`vite build`, 1.52 s). `cargo fetch` pulled 563 crates (1.1 GB in `~/.cargo/registry`).
+- Tauri prerequisites on this machine were already present: `webkit2gtk-4.1` 2.54.1, `rsvg2`, rustc/cargo 1.99.1, rustup 1.29.2. **`patchelf` was missing** and was installed — without it `tauri build` cannot produce a `.deb`/AppImage. `libayatana-appindicator` is *not* needed: the app has no tray icon (`tauri` features are empty, no `TrayIcon` references).
+- **The Rust build fails until the sidecar exists.** `tauri.conf.json` declares `externalBin: ["binaries/node"]`, and the source package intentionally ships no platform binary, so `cargo build` stops with `resource path 'binaries/node-x86_64-unknown-linux-gnu' doesn't exist`. The project's own fix is `npm run desktop:preflight:sidecar` (= backend build → `desktop:prepare-sidecar` → `desktop:smoke-sidecar`); the prepare script copies `process.execPath` as the Node sidecar, bundles `backend/dist`, and generates `resources/runtime/schema-template.db` via `drizzle-kit push`. Do not hand-copy a Node binary into `binaries/` — the script also sets up the runtime payload.
+- `bundle.targets` is `["nsis"]` — a **Windows** installer target. Building a Linux package needs `deb`/`appimage`, which is a project decision, not a local fix.
+

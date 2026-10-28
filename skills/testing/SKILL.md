@@ -15,7 +15,7 @@ A test earns its place by failing when the behavior is wrong and passing when it
 4. It is deterministic.
 5. It is fast enough that people run it.
 
-Check #2 explicitly: mentally revert the behavior and confirm the test goes red. A test that passes either way is decoration.
+Check #2 explicitly: revert the behavior (or the whole change) and watch the test go red, then restore it. If you only reasoned about it, say so. A test that passes either way is decoration.
 
 ## What to test
 

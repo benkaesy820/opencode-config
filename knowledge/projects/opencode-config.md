@@ -1,0 +1,14 @@
+## opencode-config — the agent's own configuration
+
+- Private repo `github.com/benkaesy820/opencode-config`: `AGENTS.md`, the skill set, agent definitions, host config. `service.json` holds a live service credential and stays untracked.
+- The checkout is the live config directory itself, `~/.config/opencode` on CachyOS (was `C:\Users\BenKaesy\.config\opencode`; origin = that repo). There is no second clone; the working tree is the config OpenCode reads. The knowledge base lives in the same repo under `knowledge/`, so a KB edit and an agent-config edit land in one commit.
+- Correction 2026-10-23: the transfer to CachyOS copied the files without `.git`, so the live config directory is **not** a git checkout on this machine. `git status` fails there. Reconnecting it to `opencode-config` is an open decision — nothing in the KB should assume history exists until then.
+- Versioned so that a change to a skill is reviewable before it is used.
+- 2026-10-21: `@kerneloops/opencode-session-tools` (v0.1.1, MIT, no dependencies) is installed. It adds `opencode_meta` (session metadata, tree, stats, tool usage), `recall` and `recall_get` (search and read other sessions' transcripts), and `send_message` (ask another session a question, Claude Code style). Installed with `opencode plugin add`.
+- Its search index only covers sessions seen since the plugin started; older sessions are still reachable by session ID, and the direct read works on any session.
+- `send_message` wakes the target session's agent, which then runs tools and can write files. It is not a read-only query. The read-only primitive, `ctx.session.generate`, is not exposed as a tool by the plugin.
+- Model routing: the operator picks the model. The config names no model at all, and a subagent inherits the session model.
+- 2026-10-21 (commit ade7fb7, HEAD): `default_agent` is `advisor`; `agents/advisor.md` is `mode: all` with no permission block of its own, so it inherits the blanket allow while the global destructive-command asks still apply (they sit after the allow — an allow placed after them would override them). The advisor arrived read-only in f445d9c and gained full capability here.
+- 2026-10-28, audit correction to the entry above: the asks exist but do not fire. `cli.json` sets `session.permissions = "autoaccept"`, so the client accepts every permission request automatically, including the built-in `.env` reads. The 26 `ask` rules in `opencode.json` are decoration under that setting; `deny` is the only effect that survives it.
+- 2026-10-21 (same commit): bloat sweep of `AGENTS.md` and five skills (agent-config, code-review, deep-audit, design-audit, workflow); `browser-bridge` left untouched. `workflow` lost the optional Project Brain for "Memory across sessions" (project `AGENTS.md` + the knowledge base).
+

@@ -1,6 +1,6 @@
 ---
 name: Agent Config
-description: Use when changing the agent's own configuration — AGENTS.md files, skills, plugins, MCP servers, model or agent routing, keybindings, or the tools the agent loads. Triggers on "write a skill", "edit my AGENTS.md", "add an MCP server", "change the model routing", "why isn't this skill loading", "remove a skill", "the agent ignores my instructions", "add a command", "wire up a plugin".
+description: Use when changing Ben's own OpenCode configuration — his AGENTS.md files, skills, agents, plugins, MCP servers, model routing, keybindings, or the tools they load. Triggers on "write a skill", "edit my AGENTS.md", "add an MCP server", "change the model routing", "why isn't this skill loading", "remove a skill", "the agent ignores my instructions", "add a command", "wire up a plugin". For how OpenCode itself works, the built-in `opencode` skill is the reference.
 ---
 
 # Agent Config
