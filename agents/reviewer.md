@@ -31,7 +31,7 @@ Review the changes. Report findings; do not fix them.
 
 Read the diff first, then read enough surrounding code to judge whether each finding is real. A correct observation about a line taken out of context is not a finding.
 
-Load `code-review`. Load `deep-audit` only for an exhaustive sweep, and `root-cause` only when the same symptom appears in more than one place.
+Load `code-review`. Load `deep-audit` only for an exhaustive sweep, and `root-cause` only when the same symptom appears in more than one place. If the diff is Rust, also load `rust-review`; keep `code-review`'s severity order and output shape.
 
 On a repeat review, check only the changed code and the open ids. Budget end is not approval; report what remains.
 

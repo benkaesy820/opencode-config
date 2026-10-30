@@ -27,7 +27,7 @@ Load one primary skill. Add a supporting skill only when that area is actually t
 | Task shape | Primary | Supporting |
 | --- | --- | --- |
 | Load-bearing contract choice, unclear ownership or permission model, irreversible schema or API direction | `architect-decisions` | none |
-| Reviewing a diff, PR, or branch for correctness | `code-review` | `security-audit` if auth, input handling, or secrets are in scope |
+| Reviewing a diff, PR, or branch for correctness | `code-review` | `rust-review` for Rust; `security-audit` if auth, input handling, or secrets are in scope |
 | Exhaustive audit or full sweep: "find everything", pre-release verification, audits run by subagents | `deep-audit` | `code-review` for severity and output; `security-audit` when auth, input, or secrets are involved |
 | Removing dead code, unused dependencies, or reducing bloat | `code-review` | `git-workflow` for the removal commit |
 | Something is broken or behaving unexpectedly | `debugging` | `testing` once the root cause is found |
