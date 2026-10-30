@@ -103,4 +103,4 @@
 
 ## Applications
 
-- 2026-10-30: **PandaCode removed.** 93 MB AppImage `~/.local/bin/pandacode`, `pandacode.desktop`, its icon, `~/.local/share/ai.pandacode.desktop` (904 KB data), `~/.cache/app.pandacode`, and the npx cache entry deleted. Backup at `~/backups/pandacode-uninstall-20261030-093305/` (data, desktop entry, icon; no binary). Rollback: `npx pandacode`, then restore `ai.pandacode.desktop` to `~/.local/share/`. `command-code 1.88.1` stays — separate CLI, not part of PandaCode.
+- 2026-10-30: **PandaCode removed.** 93 MB AppImage `~/.local/bin/pandacode`, `pandacode.desktop`, its icon, `~/.local/share/ai.pandacode.desktop` (904 KB data), `~/.cache/app.pandacode`, and the npx cache entry deleted. Backup `~/backups/pandacode-uninstall-20261030-093305/` was deleted 2026-10-30 at his request; the data is gone. Rollback: `npx pandacode` only. `command-code 1.88.1` stays — separate CLI, not part of PandaCode.
