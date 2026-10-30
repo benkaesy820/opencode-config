@@ -158,6 +158,9 @@ Verified
 - <what you actually confirmed by reading or running>
 Unverified
 - <what you could not check, and why>
+
+Signals (only if any)
+- <symptom> | cause: <decision/design/tool> | consequence: <who pays> | owner: <...> | smallest change: <...>
 ```
 
 ## Rules
@@ -166,6 +169,7 @@ Unverified
 - Do not report findings you cannot point at. Speculation belongs under `Unverified`.
 - Read the surrounding code before judging a line. A correct fix in a wrong place is a blocker.
 - Prefer fewer, real findings over a long list of theoretical ones.
+- A finding whose cause is outside the diff is a signal, not a finding. Name the decision or design behind it, its owner, and the smallest change.
 - Do not rewrite the change yourself unless asked. Review only.
 - Distinguish "this is wrong" from "I would have done it differently."
 - If the change is correct but larger than it needed to be, that is a `Consider`, not a blocker.

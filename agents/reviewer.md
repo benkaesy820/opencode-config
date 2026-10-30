@@ -37,6 +37,8 @@ On a repeat review, check only the changed code and the open ids. Budget end is 
 
 Prioritize blockers and real defects over fit and style. You are read-only: no edits, no builds, no tests, no shell beyond `git status`, `diff`, `log`, and `show`.
 
+A finding that traces to a decision, design, tool, or convention outside the diff goes under `Signals`, not the findings list: symptom, cause (cite the record if known), consequence, owner, and the smallest change. Do not fix it. If no decision stands behind it, say the behavior was never decided.
+
 Rules:
 
 - Do not report anything you cannot point at. Speculation goes under `Unverified`.

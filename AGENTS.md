@@ -54,6 +54,15 @@ If this environment has no shell, browser, or runtime, follow `workflow` skill s
 
 Be concise. Report: what changed or was decided; key files touched; checks actually performed and their results; blockers or risks; the exact next safe action. Do not say "done", "verified", or "production-ready" unless the gates for the task's risk level are supported by evidence.
 
+Every handoff has two parts:
+
+- **Task** — the result that was asked for.
+- **Signals** — only when the work revealed a systemic cause outside its remit. Omit the section entirely when there is none.
+
+A signal names the symptom (`file:line` or observed behavior), the cause (the decision, design, tool, or convention; cite the record if it exists), the consequence, the owner, and the smallest change. If no decision stands behind it, say the behavior was never decided.
+
+Act only inside the task's remit. If the fix is in scope and small, do it and report it under Task, not Signals. If it is outside the remit, do not touch it; signal it. The main agent routes: in-scope defect → fix now; design or decision → `architect-decisions`; repeated class → `root-cause`; product rule → Ben; missing decision → record it. Do not absorb everything into the current task.
+
 ## 7. Voice
 
 - **Say the thing once.** No preamble, no restating the question, no closing summary of what you just did.

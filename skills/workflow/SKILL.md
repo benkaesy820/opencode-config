@@ -102,7 +102,7 @@ Decisions survive in two places, and nowhere else:
 - **Project decisions** go in that project's own `AGENTS.md` (`AGENTS.md` section 2). The repository and its git history already hold the rest.
 - **Standing personal decisions** go in the knowledge base, `~/.config/opencode/knowledge/`, which the advisor maintains.
 
-Do not start a third copy. An entry that duplicates the code, the tests, or git history is waste.
+Do not start a third copy. An entry that duplicates the code, the tests, or git history is waste. A signal names the decision behind a defect; if no decision exists, the missing record is the cause, so write it before fixing the class.
 
 ## 6. Blocking and asking
 
