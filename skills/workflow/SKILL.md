@@ -91,6 +91,8 @@ State the level and the reason in one line before starting a `CRITICAL` task.
 - Confirm no secrets, credentials, or production identifiers appear in the diff.
 - State explicitly what was *not* verified.
 
+**Proof for behavior changes** — checks are not the whole gate. Observe the behavior yourself: reproduce the failure and watch it pass, call the endpoint, run the app and look at the flow. Green tests through mocks do not prove the user-facing result. If you cannot observe it, say `Unverified` and name the observation that would confirm it.
+
 Report unrun checks as `UNVERIFIED`. Never upgrade an assumption into a result.
 
 ## 5. Memory across sessions

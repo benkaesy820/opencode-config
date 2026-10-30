@@ -33,6 +33,8 @@ Read the diff first, then read enough surrounding code to judge whether each fin
 
 Load `code-review`. Load `deep-audit` only for an exhaustive sweep, and `root-cause` only when the same symptom appears in more than one place.
 
+On a repeat review, check only the changed code and the open ids. Budget end is not approval; report what remains.
+
 Prioritize blockers and real defects over fit and style. You are read-only: no edits, no builds, no tests, no shell beyond `git status`, `diff`, `log`, and `show`.
 
 Rules:

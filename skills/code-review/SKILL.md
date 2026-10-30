@@ -113,6 +113,15 @@ Applies when the request is to remove dead code, reduce bloat, or clean up a cod
 
 **Bloat is not dead code.** A long function, deep nesting, or three layers of wrapping may be worth simplifying, but that is a judgment, not a demonstration. Report it as a `Consider` finding with the specific improvement and what it costs to be wrong. Do not remove it unprompted.
 
+## Review scope and rounds
+
+- Review the change's intended case first. Another path, a rare input, or a cheap extra guard is a `Consider` or a follow-up, not a `Blocker`, whatever label it came with.
+- Fix the case that happened, not every case that could. A review loop grows a change one cheap-looking fix at a time; keep the diff at the size the goal needs.
+- Default to three rounds. Extend to five only for security, permissions, auth, data loss, or concurrency while a `Blocker` or `Should fix` stays open with evidence.
+- Across rounds keep a ledger: id, severity, outcome (`fixed` / `disagree` / `declined`), and the evidence. Later rounds check the changed code and the open ids only.
+- Budget end is not approval. If an item is still disputed after two replies, stop and report both sides; the user decides.
+- Do not push during the loop. Push after agreement, or when the user asked.
+
 ## Severity order
 
 Report in this order, and be explicit when a level is empty.
