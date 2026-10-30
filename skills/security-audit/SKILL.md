@@ -1,6 +1,6 @@
 ---
 name: Security Audit
-description: Use when work touches authentication, authorization, sessions, permissions, tokens, secrets, credentials, input validation, file uploads, SQL or shell queries built from user input, redirects, webhooks from outside, or personal data — and before shipping any of it. Triggers on "is this secure", "security review", "audit this", a new auth or login or payment flow, an endpoint reading a client-supplied user or tenant id, adding a dependency, exposing an API, or reviewing a diff that touches any of the above. Use it before the change ships, not after.
+description: Use when work touches authentication, authorization, sessions, permissions, tokens, secrets, credentials, input validation, file uploads, SQL or shell queries built from user input, redirects, webhooks from outside, or personal data — and before shipping any of it. Triggers on "is this secure", "security review", "security audit this", a new auth or login or payment flow, an endpoint reading a client-supplied user or tenant id, adding a dependency, exposing an API, or reviewing a diff that touches any of the above. Use it before the change ships, not after. For an exhaustive security audit, pair with `deep-audit`.
 ---
 
 # Security Audit

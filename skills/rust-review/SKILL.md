@@ -3,18 +3,16 @@ name: rust-review
 description: >-
   Review existing Rust code for idiom, API design, error handling, safety, and
   maintainability, and produce a prioritized report where every finding cites the rule it
-  breaks and gives a concrete fix. Use this whenever the user asks to review, audit,
-  critique, grade, or "check" Rust code, a crate, a module, a .rs file, a diff, or a pull
-  request, or asks what is wrong with their Rust or how to make it more idiomatic, even if
-  they don't say "review". Pairs with the rust-best-practices skill, which covers writing
-  new code.
+  breaks and gives a concrete fix. Use this whenever the user asks to review, critique,
+  grade, or "check" Rust code, a crate, a module, a .rs file, a diff, or a pull request,
+  or asks what is wrong with their Rust or how to make it more idiomatic, even if they
+  don't say "review". Use alongside `code-review` on a Rust diff; self-contained,
+  `rust-best-practices` is not required.
 ---
 
 # Rust review
 
-Review Rust code against the same rules the `rust-best-practices` skill uses for writing
-it, and report what to change. The output is a review, not a rewrite: the reader decides
-what to fix. Only rewrite code when the user asks for that.
+Review Rust code against the rules in this checklist, and report what to change. The output is a review, not a rewrite: the reader decides what to fix. Only rewrite code when the user asks for that.
 
 ## 1. Decide the scope
 
@@ -27,10 +25,10 @@ what to fix. Only rewrite code when the user asks for that.
   errors, and no speculative generality. Say which you assumed at the top of the report.
 - **The edition and MSRV**, from `Cargo.toml`, so you don't recommend features the
   project can't use.
-- **Frameworks.** If the crate depends on `bevy` or `bevy_ecs`, read the Bevy digest
-  (`bevy.md`) in the `rust-best-practices` skill's references first. It lists the Bevy
-  conventions to leave alone (by-value system parameters, the prelude, plain-data
-  components) and the ECS bugs to look for.
+- **Frameworks.** If the crate depends on `bevy` or `bevy_ecs` and a `rust-best-practices`
+  install provides `references/bevy.md`, read it first. Otherwise rely on the ECS checks
+  in section 3: two queries that can reach the same component mutably, systems that read
+  each other's results with no order, and deferred `Commands` read back before they apply.
 
 ## 2. Run the tools first, if you can
 
@@ -108,9 +106,9 @@ Work through these in order. The first two categories are where real bugs live.
 - Doc examples that use `unwrap()` instead of `?`.
 - Logic with no tests, or tests that only restate constants.
 
-The `rust-best-practices` skill and its `references/` folder hold the full rules and their
-reasoning. If it is installed, read the relevant reference when a finding needs a rule
-you're unsure of. Otherwise, rely on the summary above.
+This checklist is self-contained. If a `rust-best-practices` install is available, its
+`references/` folder holds the full rules and reasoning; read the relevant reference when
+a finding needs a rule you are unsure of.
 
 ## 4. Write the report
 

@@ -1,6 +1,6 @@
 ---
 name: Browser Bridge
-description: Set up and use Browser Bridge through MCP to operate websites, test local apps, use mouse and keyboard controls, and capture screenshots inside the active project. Triggers on "test this in the browser", "open this page", "screenshot the page", or "click through the app".
+description: Set up and use Browser Bridge through MCP to operate websites, test local apps, use mouse and keyboard controls, and capture screenshots inside the active project. Triggers on "test this in the browser", "open this page", "go to a URL", "open localhost", "sign in as", "fill the form", "screenshot the page", or "click through the app".
 ---
 
 # Browser Bridge

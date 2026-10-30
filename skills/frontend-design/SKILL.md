@@ -1,6 +1,6 @@
 ---
 name: Frontend Design
-description: Use when building new UI or reshaping an existing one — direction, color, typography, layout, motion, interaction, responsive behavior, copy, and accessibility. Triggers on "design this", "build a page", "make it look good", "redesign", "restyle", "recolor", "fix the layout", "it looks generic", "AI slop", or any new or reshaped screen, component, or surface.
+description: Use when building new UI or reshaping an existing one — direction, color, typography, layout, motion, interaction, responsive behavior, copy, and accessibility. Triggers on "design this", "build a page", "build a landing page", "design a dashboard", "reshape an app screen", "make it look good", "redesign", "restyle", "recolor", "fix the layout", "it looks generic", "AI slop", or any new or reshaped screen, component, or surface.
 ---
 
 # Frontend Design

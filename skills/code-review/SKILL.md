@@ -1,6 +1,6 @@
 ---
 name: Code Review
-description: Use when reviewing changes, a diff, a branch, or a pull request, before committing or opening a PR, and when asked to check, verify, sanity-check, or critique code someone wrote. Triggers on "review my changes", "review this diff", "is this ok", "check this PR", "what did I break", "any problems with this", or a request to look over work before it ships. Also use before committing a change that alters existing behavior or a public surface, and when removing dead code, unused dependencies, or reducing bloat — reporting findings with evidence before deleting anything.
+description: Use when reviewing changes, a diff, a branch, or a pull request, before committing or opening a PR, and when asked to check, verify, sanity-check, or critique code someone wrote. Triggers on "review my changes", "review this diff", "is this change ok", "check this PR", "what did I break", "any problems with this", or a request to look over work before it ships. Also use before committing a change that alters existing behavior or a public surface, and when removing dead code, unused dependencies, or reducing bloat — reporting findings with evidence before deleting anything.
 ---
 
 # Code Review
