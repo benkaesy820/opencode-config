@@ -7,6 +7,15 @@ description: Use when work touches authentication, authorization, sessions, perm
 
 Evidence-based. A finding without a reachable path is speculation, not a vulnerability.
 
+## Mode
+
+Loading this skill is guidance, not authorization for a full audit or file creation.
+
+- **Guidance** — a security question, a focused review, methodology, or triage: use only the relevant sections. Do not launch the full workflow.
+- **Full audit** — the user explicitly asks for an audit, pen-test, or end-to-end review: load `deep-audit` for the coverage ledger, falsification, prior-run continuity, and budget. This skill supplies the security checks; `deep-audit` supplies the engine.
+
+If the request could be either, ask one focused question before creating files or starting a full run.
+
 ## Scope
 
 Establish the trust boundary and the attacker before looking for anything.
@@ -17,6 +26,10 @@ Establish the trust boundary and the attacker before looking for anything.
 - Which boundary is being crossed?
 
 Most real findings come from answering these four questions, not from a checklist.
+
+**The finding gate.** Every candidate names all six: the lower-trust principal, the input or action, the intended control, the boundary crossed, the affected principal or resource, and the concrete result. If any one is missing, it is `Unverified`, not a finding.
+
+**Source visibility.** Deployment, proxy, provider, browser, identity, and topology are real controls. If the repository does not show them, assume neither presence nor absence: state the missing fact and the safe check that would settle it.
 
 ## Authentication and sessions
 
@@ -101,7 +114,7 @@ Findings, severity order
   Path: <attacker input> → <sink>
   Impact: <what the attacker achieves>
   Evidence: <the code that proves it>
-  Fix: <smallest correction>
+  Fix: <smallest correction at the last trusted decision point>
 
 Checked and clean: <areas examined, so coverage is visible>
 Unverified: <what could not be checked and why>
@@ -109,9 +122,20 @@ Unverified: <what could not be checked and why>
 
 ## Rules
 
-- Every finding needs a reachable path from untrusted input to the sink. If you cannot describe it, move it to `Unverified`.
-- Rate severity by impact and reachability, not by how alarming it sounds.
+- Every finding passes the finding gate above. If you cannot name all six, it is `Unverified`, not a finding.
+- **Certainty is not severity.** Only a confirmed finding gets a severity. An `Unverified` candidate has none; it is a hypothesis with the exact check that would confirm it.
+- **Severity anchors.** Critical: unauthenticated code execution, full data-store access, or arbitrary account takeover. High: a full defeat of an explicit control — authentication bypass, cross-tenant read or write, stored script execution, authenticated code execution. Medium: a real boundary violation with limited blast radius or uncommon preconditions. Low: disclosure of non-secret internals, or an effect requiring sustained effort for minimal gain. Informational: confirmed, minimal impact, useful mainly as a prerequisite. The high/medium discriminator: does the result fully defeat the control, or only weaken it? If you cannot state the concrete damage, it is lower than it feels.
 - Never invent a vulnerability to appear thorough. An empty report on sound code is a valid and useful result.
 - Never invent product rules: authentication requirements, retention periods, roles, and compliance obligations are the user's decisions. If one is missing, name it as an open question rather than assuming a policy.
-- Prefer specific, minimal fixes. Do not propose a rewrite.
+- Prefer specific, minimal fixes at the last trusted decision point; name the invariant and add a regression test. Do not propose a rewrite.
+- **Execution safety.** Static reading first. Run target code only in a sandbox with no external network, a scrubbed environment, a read-only target, and resource limits. Use dummy principals and fixtures; never probe live endpoints, production identities, other users' data, or shared services. If the sandbox is unavailable, do not execute: report `Unverified` with a safe plan.
 - Do not write exploit payloads aimed at systems you were not asked to test.
+
+## Anti-patterns
+
+- A checklist deviation presented as a vulnerability.
+- Defense-in-depth advice with no reachable boundary violation.
+- Testing a live or shared environment when bounded local evidence is enough.
+- Guessing provider, proxy, browser, identity, or deployment behavior the source does not show.
+- Treating intended same-principal authority or self-impact as a cross-boundary result.
+- Reporting a parser or runtime effect stronger than the observed effect.
