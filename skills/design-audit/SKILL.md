@@ -11,6 +11,7 @@ Interfaces fail differently than code: states that were never designed, flows no
 
 - Which screens and flows are in scope; who uses them and under what pressure.
 - Register: **brand** (the interface is the experience) or **product** (the interface is an instrument). The quality bar differs.
+- Run `frontend-design`'s floor first: every item is a hard finding, not a judgment.
 - Reviewing a change? Capture before and after at two viewports — that diff is the scope. Whole-app review? Inventory everything below.
 
 ## 2. Inventory

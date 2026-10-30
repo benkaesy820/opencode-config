@@ -9,11 +9,30 @@ Act as the design lead at a studio known for giving every client a distinct visu
 
 Two layers, one skill: **direction** — what makes this specific and not templated — and **craft** — the disciplines that make it usable and coherent.
 
+## The floor
+
+Non-negotiable on every surface, even when the brief is silent. The rest of this skill explains how; these are the checks.
+
+1. Every colour and font goes through a token declared at `:root` or a theme block. No literal colour or `font-family` past the token block.
+2. Never `transition: all`. Animate `transform` and `opacity` only — never `width`, `height`, `top`, or `left`.
+3. Every interactive element has a `:focus-visible` ring that appears instantly.
+4. Every animation has a `prefers-reduced-motion: reduce` fallback. On a content page, the content is visible with scripting off.
+5. `overflow-x: clip` on both `html` and `body`; never `hidden`, never `100vw`.
+6. Image-bearing grid tracks use `minmax(0, 1fr)`; display headings carry `min-width: 0` and `overflow-wrap: break-word`.
+7. Never invent a metric, testimonial, logo, or case-study count. If the material is absent, the page does not have it.
+8. Labels, captions, table heads, tags, and nav links use the body face, one step smaller, sentence or lower case, untracked. No eyebrow, no tracked capitals, no small caps.
+9. No middle-dot-joined meta, no arrow glued to link text, no decorative status dot, no emoji as an icon, no hand-drawn browser or OS window.
+10. On a brand page, the hero's headline, one sentence, and primary action are visible at 1280×800 without scrolling. On an app screen, the primary action and the first useful data are. The container is capped and centred: at 1920 the gutters grow, the measure and grids do not.
+
+*Derived from Hallmark 2.0.0 (Together AI), paraphrased; the rest of this skill is the original third-party work.*
+
 ## 1. Ground the design in the subject
 
 If the brief does not say what the product is, decide one concrete subject, its audience, and its primary job, and confirm. A toy for girls aged 8–11 looks nothing like a dashboard for financial analysts. Distinctive choices come from the subject's industry, materials, and vernacular — not from a mood board.
 
 Extract the invariants before designing: **name** (use it as given), **category** (visible in the first viewport), **user** (who arrives, under what pressure), **job** (monitor, operate, compare, configure, learn, decide, explore), **artifact** (the real object of the domain — a schedule, map, invoice, queue, route, chart), and **evidence** (what makes a user trust it works). If the hero proof object could be dropped into an unrelated product without becoming wrong, it is generic.
+
+**Material first.** Before the plan, inventory what the page can show in one line: **real** (every concrete thing the prompt or project supplies — name, claim, numbers, places, dates, images), **pictures** (what it shows and where each comes from: the user's files, screenshots of the real product, the product itself), **absent** (every proof it will not have — logos, quotes, metrics nobody gave). The shape follows the material: a page with pictures leads with them; a page about words carries type and facts. Never fill `absent` with an invented figure, quote, or logo.
 
 Composition follows the work, not habit: dashboards need boards and metrics; editors need canvases and inspectors; comparison needs tables and scanning lanes; settings need grouped forms and a clear commit area; a landing page needs one focused pitch and one dominant action. Repeated cards, a centered hero, and pill buttons are allowed only when that pattern is the right answer — never as house style.
 
@@ -26,7 +45,7 @@ Work in two passes. First produce a compact token plan:
 - **Layout** — a concept as one-sentence prose plus a rough ASCII wireframe. State the alignment.
 - **Principles** — what makes this page *this* page.
 
-Then review the plan against the brief: if any part is what you would produce for any similar brief, revise it and say what changed and why. Only then write code.
+Then review the plan against the brief: if any part is what you would produce for any similar brief, revise it and say what changed and why. **Mirror test:** would a neighbouring prompt in the same category get this exact combination? If yes, change one decision and name it. Only then write code.
 
 Watch CSS specificity when composing — a class-level `.section` rule and an element-level `.cta` rule cancel each other easily, especially on padding and margin between sections.
 
