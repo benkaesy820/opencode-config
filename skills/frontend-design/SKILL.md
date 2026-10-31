@@ -97,7 +97,41 @@ Spend boldness in one place. Let one element be the memorable thing and keep eve
 
 Critique as you build — screenshot and compare if the environment allows. Vary across projects; do not reuse the composition that worked last time. The bar is "I would demo this", not "it works."
 
-## 7. Work honestly
+## 7. Remediation order
+
+When the screen exists already and looks generated, fix it in passes, not in one repaint. Finish a pass across the whole screen before starting the next — repainting colour over a layout that is still wrong wastes the pass. Set the direction first (section 1), then work in this order.
+
+1. **Spacing.** Every value on the 4px grid; equal things equal; space inside a group smaller than space between groups; icons, labels and figures each in one column.
+2. **Colour.** One tinted neutral ramp, three text roles, one accent used rarely. No hue gradients, gradient text, glows or coloured shadows.
+3. **Icons.** One set, one size, one stroke; no emoji as an icon; drop icons that add nothing.
+4. **Copy.** What the product does for whom; no greeting headline, no exclamation marks, no hype; every number says what it compares to.
+5. **Type.** A few sizes from one scale, two weights, hierarchy from size and colour rather than weight.
+6. **Layout.** Keep the sections and their order; fix proportions and alignment inside them.
+7. **Details.** Nested radii that add up, quiet counts, visible focus, hover and active states inside the palette.
+8. **Visuals.** Richness goes into one moment of content; the chrome stays quiet; decorative filler goes.
+9. **Motion.** One easing curve, `transform` and `opacity` only, no loop that explains nothing.
+10. **Gate.** Re-render and walk the checklist below. Anything still failing gets fixed, not explained.
+
+The screen is done when the checklist passes, not when the passes are done.
+
+Adapted from [unslop](https://github.com/heydamir/unslop) by Damir Sokolovsky, CC BY 4.0.
+
+- [ ] Direction written, every pass follows it
+- [ ] Spacing on the 4px scale; equal things equal
+- [ ] Icons, labels and numbers each in one aligned column
+- [ ] One neutral ramp, three text roles, one accent with enough contrast
+- [ ] No hue gradients, gradient text, glows, coloured shadows or blobs
+- [ ] No emoji left in the interface
+- [ ] One icon set, one size, one stroke
+- [ ] Type chosen for the character; no tracked capitals, no italic, no negative tracking on small text
+- [ ] No exclamation marks, no trailing periods on short strings, no greeting headline, no unverified claims
+- [ ] Numbers in one format with tabular figures
+- [ ] Nested radii add up
+- [ ] A hero has a real visual or a product preview with a moment, never filler
+- [ ] No looping or bouncy motion; no animated layout properties
+- [ ] Swap in another product's name — does the screen still fit? If yes, push the direction harder
+
+## 8. Work honestly
 
 Edit real files, not markdown mockups. Test with realistic data ("John Doe" hides truncation; long German strings expose it). Build each state as you go. Before claiming a change, verify it against the rendered result: say "added", "fixed", or "animated" only when there is a real implementation change visible in the UI, and say "inspected" when you only looked. If you cannot verify a claim, verify it or drop it.
 
