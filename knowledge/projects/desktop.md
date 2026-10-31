@@ -104,3 +104,5 @@
 ## Applications
 
 - 2026-10-30: **PandaCode removed.** 93 MB AppImage `~/.local/bin/pandacode`, `pandacode.desktop`, its icon, `~/.local/share/ai.pandacode.desktop` (904 KB data), `~/.cache/app.pandacode`, and the npx cache entry deleted. Backup `~/backups/pandacode-uninstall-20261030-093305/` was deleted 2026-10-30 at his request; the data is gone. Rollback: `npx pandacode` only. `command-code 1.88.1` stays — separate CLI, not part of PandaCode.
+
+- 2026-10-31: **kitty design pass** — font 12.0, padding 12, a custom fish prompt (`prompt_pwd` + git branch/dirty state + bold `❯` + clock at right), `fish_title` = cwd, and fastfetch switched to the small CachyOS logo with a compact module list. Backup at `~/backups/kitty-design-20261031-094211/`; rollback: restore `kitty.conf`, `themes/`, `config.fish`, `conf.d/`, `functions/`, and remove `~/.config/fastfetch/config.jsonc`.
