@@ -1,6 +1,6 @@
 ---
 name: Git Workflow
-description: Use before committing, pushing, branching, stashing, rebasing, amending, cherry-picking, resetting, tagging, or cutting a release, and whenever history could be rewritten or a remote touched. Triggers on "commit this", "commit and push", "open a PR", "make a branch", "rebase onto main", "squash", "undo my last commit", "bump the version", "cut a release", or a request to prepare a commit message. Use it to keep diffs scoped and to know which git commands need explicit authorization first.
+description: Use before committing, pushing, branching, stashing, rebasing, amending, cherry-picking, resetting, tagging, creating, parking or removing a worktree, or cutting a release, and whenever history could be rewritten or a remote touched. Triggers on "commit this", "commit and push", "open a PR", "make a branch", "create a worktree", "remove a worktree", "rebase onto main", "squash", "undo my last commit", "bump the version", "cut a release", or a request to prepare a commit message. Use it to keep diffs scoped and to know which git commands need explicit authorization first.
 ---
 
 # Git Workflow

@@ -36,7 +36,7 @@ Load one primary skill. Add a supporting skill only when that area is actually t
 | A "keep going until X" objective: make tests pass, fix until green, run-until conditions | goal plugin (`/goal`) | `debugging` for the failures it hits; `testing` for the check itself |
 | Auth, secrets, input validation, dependency risk, exposure review | `security-audit` | `code-review` |
 | READMEs, ADRs, API docs, comments, changelogs | `documentation` | none |
-| Branching, commits, rebase, tags, release prep | `git-workflow` | `code-review` before proposing commits |
+| Branching, worktrees, commits, rebase, tags, release prep | `git-workflow` | `code-review` before proposing commits |
 | Endpoint or interface design: REST, GraphQL, RPC, schemas | `api-design` | `architect-decisions` for versioning or breaking changes |
 | Building new UI or reshaping an existing one: aesthetic direction, typography, palette, layout | `frontend-design` | `api-design` for forms backed by an endpoint |
 | Reviewing UI, UX, or design quality: usability, accessibility, states, responsive, copy | `design-audit` | `browser-bridge` for evidence; `frontend-design` for the quality bar |
