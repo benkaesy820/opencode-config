@@ -72,6 +72,15 @@ Refs #<issue>
 
 Match the repository's existing commit style. Run `git log --oneline -20` and follow it rather than imposing a convention.
 
+## Pushing
+
+A push means the configured remote. A local commit is not a push.
+
+- Push only when authorized. Then push the current branch to its upstream: `git push`, or `git push -u <remote> <branch>` when it has none.
+- Verify the result: `git status -sb` shows the upstream and ahead/behind; `git log -1 --format='%H %s'` gives the SHA.
+- If there is no remote or upstream, stop and report it. Do not invent one.
+- Report the remote, branch and SHA. Never leave project work local-only when the task said push.
+
 ## Branching
 
 ```sh
@@ -81,6 +90,15 @@ git switch -c <type>/<short-description>
 Common shapes: `feature/`, `fix/`, `chore/`, `docs/`. Follow the repo's existing pattern.
 
 Never create or push a branch unless asked.
+
+## Worktrees
+
+A worktree is scratch space, not storage. Its source is cheap; its build cache is not.
+
+- Keep one worktree per active task. Remove it once its branch is merged: `git worktree remove <path>`, then `git worktree prune`.
+- Before parking a worktree, clean its build output: `cargo clean --profile dev` for Rust, or the project's equivalent. Leave source and release artifacts, not a multi-GB debug target.
+- Never delete an unmerged worktree or uncommitted changes. Report it instead.
+- Do not share `CARGO_TARGET_DIR` across parallel worktrees; the build lock and feature differences cause thrash. Use `sccache` if rebuild time matters.
 
 ## Inspecting history
 

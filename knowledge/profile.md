@@ -42,6 +42,7 @@ Last updated: 2026-10-28.
 - Concise. Speak only when there is something to say.
 - Plain words, not simplified thinking: keep the terms that carry meaning, explain unfamiliar ones once, never soften a real constraint.
 
+- 2026-11-02: **a push means the remote.** Local-only commits do not count as pushed project work.
 - 2026-10-27: wants an explicit done/deferred ledger in every handoff — what was built, what was deliberately deferred, and the trigger for each deferred item. Do not bury a deferral in reasoning; say "not now, because X; it lands when Y".
 - 2026-10-27: **MFA is not used in republic-mart v2.** Do not plan TOTP, authenticators or recovery codes. The frozen schema's authenticator tables stay unused.
 - 2026-10-27: **the old TypeScript project is off limits.** Do not read `~/Projects/republic-mart` again; ask Ben when a product rule is needed.
