@@ -32,6 +32,7 @@ Last updated: 2026-10-28.
 - 2026-10-28: trusts the model to follow the written rules; the permission list is a backstop for the catastrophic class, not a sandbox.
 - Superseded 2026-10-23: prefers Edge over Playwright's bundled Chromium — the installed browser, used as-is. On Linux the bridge only ships bundled Chromium, and that is accepted.
 - Superseded 2026-10-23: prefers Windows Terminal to be the default terminal where possible.
+- 2026-11-02: Android development is **Android-only**; the stack is **Kotlin + Jetpack Compose**, not React Native or Flutter.
 
 ## How he wants to be talked to
 
