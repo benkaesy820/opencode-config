@@ -22,6 +22,7 @@ Last updated: 2026-10-28.
 - Wants the look of Tabby: dark and light schemes that follow the OS theme automatically, no transparency, a small precise cursor, a quiet tab strip.
 - 2026-10-26: the terminal is **kitty** (foot removed). `~/.config/kitty/kitty.conf` is Tabby-like on purpose — opaque, a beam cursor that does not blink, a quiet separator tab strip at the bottom — and Noctalia drives its colours live, so the terminal follows the desktop theme.
 - Speed is a feature. Measure before optimising, re-measure after, name the instrument.
+- 2026-11-02: **do not clear Cargo build caches on active projects.** Keep the incremental target so development stays fast; clean only when the project is done, or on measured disk pressure with his agreement.
 - Hates bloat — "love efficient, hate bloat". A new mechanism must replace something or close a named gap.
 - 2026-10-27: portability is a hard requirement for the apps he ships — one codebase that runs on Linux now and moves to other desktops later without a rewrite, and that he can keep maintaining himself. Weight, reliability and efficiency rank above ecosystem size.
 - Likes the boring mechanism: standard library, platform feature, the pattern already used in the repo.

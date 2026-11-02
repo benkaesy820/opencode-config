@@ -93,12 +93,13 @@ Never create or push a branch unless asked.
 
 ## Worktrees
 
-A worktree is scratch space, not storage. Its source is cheap; its build cache is not.
+A worktree is scratch space, not storage. Its source is cheap; its build cache is what makes iteration fast.
 
 - Keep one worktree per active task. Remove it once its branch is merged: `git worktree remove <path>`, then `git worktree prune`.
-- Before parking a worktree, clean its build output: `cargo clean --profile dev` for Rust, or the project's equivalent. Leave source and release artifacts, not a multi-GB debug target.
+- Do not clean build output while the worktree is active. Keep the incremental target so rebuilds stay fast. After the branch is merged, abandoned, or otherwise done, remove the worktree; if it must stay, clean its dev profile then.
 - Never delete an unmerged worktree or uncommitted changes. Report it instead.
 - Do not share `CARGO_TARGET_DIR` across parallel worktrees; the build lock and feature differences cause thrash. Use `sccache` if rebuild time matters.
+- `cargo clean` is a completion or disk-pressure action, never routine housekeeping. Do not wipe an active target just to save space.
 
 ## Inspecting history
 
