@@ -12,6 +12,7 @@ One file per project under `projects/`. This page is the index; each file keeps 
 | desktop | `projects/desktop.md` | active — CachyOS/niri, Noctalia, Helium |
 | phone | `projects/phone.md` | active — Samsung S21+ debloat |
 | opencode-config | `projects/opencode-config.md` | active — this configuration |
+| research-bridge | `projects/research-bridge.md` | active — local Rust MCP research server |
 | windows retired | `projects/windows-retired.md` | historical |
 | open threads | `projects/open-threads.md` | cross-project open items |
 

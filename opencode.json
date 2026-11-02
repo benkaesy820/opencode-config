@@ -15,6 +15,15 @@
           "BRIDGE_LOG_LEVEL": "warn",
           "BRIDGE_BROWSER": "bundled"
         }
+      },
+      "research-bridge": {
+        "type": "local",
+        "command": [
+          "/home/benkaesy/.local/bin/research-bridge"
+        ],
+        "environment": {
+          "RESEARCH_HOME": "/home/benkaesy/.local/share/research-bridge"
+        }
       }
     }
   },
