@@ -18,6 +18,7 @@ The agent's configuration is executable documentation: it decides what the agent
 - **A skill loads because its description matched the request.** The description is a trigger contract, not a summary — it should contain the situations and the words a user would actually use.
 - **One skill per domain, with a crisp boundary.** Two skills that overlap are two chances to load the wrong one. If the boundaries blur, merge them.
 - **Do not load skills speculatively.** A skill that is "not speculative" for its own domain becomes noise everywhere else.
+- **Descriptions are always in context.** Every skill's description loads in every session whether or not the skill fires. Measure the total before adding another: the 17 local descriptions are 9.8 KB. An 18th must displace one of the existing ones or close a named gap — never add one because the coverage sounds useful.
 
 ## 3. Precedence
 
@@ -40,6 +41,7 @@ The agent's configuration is executable documentation: it decides what the agent
 - **Rules** that encode what has gone wrong before.
 - **One file** unless the skill genuinely needs scripts or references.
 - **A skill that cannot be applied is a liability.** If a skill's guidance has no reachable trigger, delete it rather than leaving it to compete for attention.
+- **A third-party body stays intact.** If a skill adapts someone else's work, keep their text unchanged, mark the source, and append your additions as a clearly separated section.
 
 ## 6. Removing something
 

@@ -44,28 +44,9 @@ node ABSOLUTE_CLI_PATH mcp --stdio
 
 ### Host configuration
 
-OpenCode v2 uses `mcp.servers` with `type`, `command`, and `environment`. On this machine the effective file is `~/.config/opencode/opencode.json` (OpenCode 2.1.4):
+The MCP entry lives in `opencode.json` under `mcp.servers`: `type: "local"`, a `command` that is an argv array — `node`, the absolute path to the built CLI, `mcp`, `--stdio` — and `environment` for `BRIDGE_LOG_LEVEL` and `BRIDGE_BROWSER`. If an entry exists, read it from the file rather than trusting this skill; if the server has never been configured, copy the OpenCode block from the checkout's `docs/mcp.md` and substitute the local path it tells you to. `BRIDGE_BROWSER` pins the channel (`bundled|chromium|chrome|msedge`); unset, the engine picks installed Edge on Windows and bundled Chromium elsewhere. `BRIDGE_CDP` is only for attach mode; with it set and no debug browser running, launches fail loudly.
 
-```json
-{
-  "mcp": {
-    "servers": {
-      "browser-bridge": {
-        "type": "local",
-        "command": ["/usr/bin/node", "/home/benkaesy/BrowserX-AgenticBrowser/packages/cli/dist/cli.js", "mcp", "--stdio"],
-        "environment": {
-          "BRIDGE_LOG_LEVEL": "warn",
-          "BRIDGE_BROWSER": "bundled"
-        }
-      }
-    }
-  }
-}
-```
-
-`BRIDGE_BROWSER` pins the channel (`bundled|chromium|chrome|msedge`). Unset, the engine picks installed Edge on Windows and bundled Chromium elsewhere. `BRIDGE_CDP` is only for attach mode; with it set and no debug browser running, launches fail loudly. An edit to this file reloads live: OpenCode respawns the frontends and the new catalog appears without a restart. If the catalog looks stale, `opencode service restart` — get approval first.
-
-Then reconnect, inspect the live tool catalog, and make one harmless call. `opencode mcp list` is a secondary signal in some versions; trust the catalog.
+An edit reloads live: OpenCode respawns the frontends and the new catalog appears without a restart. If it looks stale, `opencode service restart` — get approval first. Then inspect the live tool catalog and make one harmless call. `opencode mcp list` is a secondary signal in some versions; trust the catalog.
 
 ## Sessions and the workspace
 
@@ -75,6 +56,9 @@ Start from the real project directory and URL, never the tool checkout. `browser
 - **Output placement.** Outputs land in `<workspace>/.browser-bridge/<sessionId>/` even if roots change. The workspace controls outputs, not which page you may visit.
 - **Cleanup.** Ignore `.browser-bridge/` in Git. Close/shutdown removes managed files, so copy required evidence inside the project first; crash leftovers expire after seven days by default.
 - **Profiles.** `profile` keeps cookies and localStorage across sessions; one session holds a profile at a time (`POLICY_DENIED` otherwise). Names are `[A-Za-z0-9_-]`, up to 64 chars. The store lives under the OS temp dir; `BRIDGE_PROFILE_DIR` moves it. Have the human sign in through takeover, then resume. Never type passwords — they are masked in observations.
+- **Finding a session you lost.** There is no separate session tool, but `browser_tabs` with `operation: "list"` and no `sessionId` returns every live session with its tabs, plus `client`, `paused`, and `idleMs`. A session whose id was lost mid-script is still there; look before creating a second one.
+- **Two agents, one browser.** Each `browser_start` is its own session: its own cookies, its own window. Sessions see each other in that list, and that list is the whole coordination surface — acting inside another session's tab is not offered.
+- **The idle lease.** A session belongs to the connection that created it. When that connection goes, the session stays open for fifteen minutes of idleness and is then closed; one a human holds is never closed. `client: null` means nobody owns it — usable, and expiring. `client` set means someone is driving it: leave it alone and open your own.
 
 ## Attach mode: Cloudflare-protected sites
 
@@ -98,22 +82,23 @@ Every tool takes an optional `requestId`. Session tools take `sessionId` and usu
 | --- | --- |
 | `browser_start` | Create a session; optional `url`, `workspace`, `profile`. |
 | `browser_observe` | Read state: `controls`, `summary`, `delta`, `visual`, `inspect`. |
-| `browser_read` | The page as `text`, `markdown`, `links`, or `html`. |
+| `browser_read` | The page as `text`, `markdown`, `links`, or `html`; `limit` caps it, `save: true` writes the whole page to disk and returns an excerpt plus `page.saved.path`. |
 | `browser_js` | Evaluate an expression; the escape hatch. |
 | `browser_act` | One typed action, optional postcondition and capture. |
 | `browser_batch` | 1–20 actions; `stopOnError` defaults true. |
 | `browser_wait` | Wait for one explicit condition. |
 | `browser_search` | Substring query; refreshes and returns current refs. |
-| `browser_tabs` | `list`, `open`, `select`, `close`, `viewport`. |
+| `browser_tabs` | `list`, `open`, `select`, `close`, `viewport`. `list` with no `sessionId` inventories every session. |
 | `browser_diagnostics` | Console errors, failed requests, HTTP errors, downloads. |
 | `browser_takeover` | `pause`, `resume`, `status`. |
 | `browser_storage` | Cookies and local/sessionStorage; writes are gated by ownership. |
 | `browser_close` | Terminal teardown of a session and its managed files. |
+| `browser_feedback` | One line to the maintainer's friction log. Changes nothing on the page. |
 
 Actions: `click`, `hover`, `fill`, `type`, `press`, `select`, `check`, `scroll`, `navigate`, `back`, `forward`, `reload`, `upload`, plus `clickAt`, `moveAt`, `scrollAt`, `dragAt`. Read the schema for arguments.
 
 - **Ownership.** One owner, `agent` or `human`. Real input in the window makes the human the owner and pauses mutations; reads keep working. `browser_takeover status` shows who holds control; the human resumes.
-- **Refs are revision-bound.** Act on refs from the latest observation, search, navigation, viewport change, or takeover. A repeated label is matched by frame, slot, role, and name; ambiguity names current candidates — re-observe.
+- **Refs name an element, not a moment.** A ref survives an observe, a wait, a read, or an action that left the control list unchanged. It dies when the element set actually changes, and `resume` after a human takeover retires every ref regardless. A repeated label is still matched by frame, slot, role, and name; ambiguity names current candidates — re-observe.
 - **Typed text is echoed, not trusted.** `fill`/`type`/`select` return the settled value; empty after a non-empty input means the widget cleared it. Password fields are never echoed.
 - Prefer mouse actions on semantic refs; use coordinates only for targets with no ref. Never replace real UI interaction with injected DOM clicks.
 - A click that opens a new tab reports it in `newTabs` and leaves the selected tab unchanged; `followPopup: true` returns its observation.
@@ -135,13 +120,31 @@ Combine the action, an app-level assertion, and the capture in one call:
 
 Conditions are `textVisible`, `urlContains`, `elementVisible`, and `elementEnabled`; `timeoutMs` is 250–30000, default 5000. Choose a before/after distinction: text that was already present proves readiness, not that the click worked. `postcondition.status: "timeout"` is not verified success even when an image came back. Batch only steps whose targets stay valid; do not batch across a navigation when later targets must be discovered.
 
+Anything that has to wait belongs in a `wait` step or a postcondition — one call, one queue slot, and the page cannot change between the wait and the act. `browser_js` awaits a returned promise (bounded at ten seconds), so an async expression works; a fixed sleep is still refused on purpose, because it is where flaky tests come from.
+
 ## Captures and coordinates
 
 Captures need the flag: `includeScreenshot` on observe, `captureScreenshot` on act/batch. Read the capture options from the schema. A capture option without the flag is rejected. `maskRefs` fails closed if a target disappeared; masks are not a complete privacy guarantee. `screenshotRef` captures one control's box. There is no separate screenshot tool.
 
+The image arrives twice: as a content block, and as a file. Its absolute path is `artifacts[0].path` in the structured result, under `<workspace>/.browser-bridge/<sessionId>/`. Read that field when a script needs the file; `observation.screenshot` does not exist and never has.
+
 For `mode: "visual"`, the image is clean (no painted numbers); the top-level `overlay` beside `observation` lists up to 100 controls with `n`, `ref`, `role`, `name`, `frame`, and viewport CSS-pixel `x`/`y`. Those are centres, not bounding boxes, and not image recognition. Act on a point with `clickAt`/`moveAt`/`scrollAt`/`dragAt` and the observation revision as `screenshotRevision`. Every completed act publishes a new revision, `moveAt` included. A full-page image is evidence, not a viewport map; scroll and take fresh viewport evidence for off-screen targets.
 
 Viewport: `browser_tabs` with `operation: "viewport"` and `free: true` returns to normal tiling. Presets: mobile 390×844, tablet 820×1180, desktop 1440×900; custom 320–3840 wide by 320–2160 high. `keepWindow: true` pins a layout without resizing.
+
+## When the tool gets in your way
+
+This tool is maintained by the person you are working for. When it costs you more than the page does, say so — one call, then carry on with the task.
+
+```json
+{ "note": "Had to compare two product pages; browser_read returns ~40k chars each into context and writes nothing to disk, so holding both costs about 80k. A saved path would have been one line.", "kind": "missing", "sessionId": "SESSION_FROM_START" }
+```
+
+Report when you work around the tool, when a description sent you the wrong way, when a step took more calls than it should, or when something you needed does not exist. `kind` is `friction` (worked, cost too much), `missing` (no way to do it), `doc` (a tool or field did not say what it does), or `bug` (it did the wrong thing). The call writes one JSON line to `artifacts/friction.jsonl` beside the journal, with the session's URL and your last action attached, and changes nothing on the page.
+
+Before reporting something as `missing`, check three places, because the capability is often already there: `browser_tabs` with no `sessionId` lists sessions, the tool's own schema carries options the description does not mention, and `browser_read` returns the whole page when the observation's text is capped. Three of the first ten friction reports were capabilities the tool already had and did not advertise.
+
+What not to do instead: do not start a second browser or session to work around a problem, do not drop to the shell for something a tool covers, and do not silently accept a worse route. Report it and continue.
 
 ## Recovery
 

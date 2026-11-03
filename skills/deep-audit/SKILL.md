@@ -14,7 +14,7 @@ One unproven finding discredits every real one, so precision is not negotiable. 
 Before reading anything:
 
 1. Restate the outcome in one sentence: what must be true when this audit ends.
-2. Classify it: first audit or repeat (§9); code, UI, live-state, or mixed; and which type from the presets (§15).
+2. Classify it: first audit or repeat (§9); and code, UI, live-state, or mixed.
 3. Define the boundary. A diff review covers the diff plus its direct callers, callees, tests, config, and consumers. Everything outside that is adjacent, not out of bounds.
 4. Order the surfaces by risk, not by interest: auth, permissions, money, data loss, concurrency, external calls, public contracts.
 5. If the premise cannot be audited — empty diff, missing files, wrong branch, contradictory brief — stop and say so. Auditing the wrong thing is worse than not auditing.
@@ -203,18 +203,7 @@ Residual risk — <what could still be hiding, and why you believe it is unlikel
 
 An empty findings list is a valid and useful result. Padding it to look thorough is the one unforgivable failure.
 
-## 15. Audit-type presets
-
-| Type | Mandatory additions |
-| --- | --- |
-| Security review | Auth, per-object authorization, injection, secrets, dependency advisories (`security-audit`) |
-| Dead-code sweep | Callers and consumers exhaustively enumerated; dynamic resolution ruled out (`code-review`) |
-| Contract drift | Contracts, migrations, consumers, doc claims |
-| Production-readiness | Live state and operations (§7), backups, runbooks, rollback |
-| Pre-release | Test hermeticity, config diffs, rollout and rollback path |
-| UI/UX | `design-audit`: screens × states × breakpoints × input modes |
-
-## 16. As a subagent
+## 15. As a subagent
 
 Your report is the deliverable: the parent sees the coverage ledger, the leads, and the cuts, not your process. Every finding pointable, every claim checkable, no reliance on unstated context. Read-only unless the task says otherwise — report, do not repair. If an instrument is unavailable — browser, runtime, database — do the applicable half and list the rest as `Unverified` with exact steps for the caller. Spend steps on coverage and falsification, not on prose.
 

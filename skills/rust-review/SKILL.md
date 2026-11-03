@@ -25,10 +25,7 @@ Review Rust code against the rules in this checklist, and report what to change.
   errors, and no speculative generality. Say which you assumed at the top of the report.
 - **The edition and MSRV**, from `Cargo.toml`, so you don't recommend features the
   project can't use.
-- **Frameworks.** If the crate depends on `bevy` or `bevy_ecs` and a `rust-best-practices`
-  install provides `references/bevy.md`, read it first. Otherwise rely on the ECS checks
-  in section 3: two queries that can reach the same component mutably, systems that read
-  each other's results with no order, and deferred `Commands` read back before they apply.
+- **Frameworks.** If the crate depends on `bevy` or `bevy_ecs`, apply the ECS checks in section 3: two queries that can reach the same component mutably, systems that read each other's results with no order, and deferred `Commands` read back before they apply.
 
 ## 2. Run the tools first, if you can
 
@@ -106,9 +103,7 @@ Work through these in order. The first two categories are where real bugs live.
 - Doc examples that use `unwrap()` instead of `?`.
 - Logic with no tests, or tests that only restate constants.
 
-This checklist is self-contained. If a `rust-best-practices` install is available, its
-`references/` folder holds the full rules and reasoning; read the relevant reference when
-a finding needs a rule you are unsure of.
+This checklist is self-contained.
 
 ## 4. Write the report
 

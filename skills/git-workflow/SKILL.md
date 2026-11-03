@@ -12,7 +12,7 @@ Preserve the user's work. Git operations that lose changes require explicit auth
 State the exact command and its effect first, then wait for a yes.
 
 - `push`, `push --force`, `push --force-with-lease`, `push --delete`
-- `reset --hard`, `clean`, `revert` on shared history
+- `reset --hard`, `clean`
 - `rebase`, `cherry-pick`, `filter-branch`, `filter-repo`
 - `commit --amend`, `commit` on someone else's behalf
 - `stash`, `stash pop`, `stash drop`
@@ -138,6 +138,8 @@ If something was lost:
 git reflog                  # find the previous HEAD
 git fsck --lost-found        # find dangling objects
 ```
+
+To undo a commit that has already been published, use `git revert <sha>`: it creates a new commit and loses nothing (a merge commit needs `-m <parent-number>`). `reset --hard` is for local history only.
 
 Report what was recoverable and let the user restore it. Do not attempt an aggressive recovery yourself.
 

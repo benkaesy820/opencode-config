@@ -99,22 +99,13 @@ The cost is not tokens. A comment that says why is invisible from the code and c
 
 **The exception:** keep the historical note when it records a decision that could plausibly be re-litigated — a removed feature, a rejected approach, a constraint someone will hit again. Then say *why*, and say what happens if someone reverses it. That is institutional knowledge, and deleting it loses it for real.
 
-### A comment that instructs a future agent
-
-Worst case, and distinct from both above:
-
-```js
-// TODO: reinstate face unlock once the API is ready
-```
-
-That is not documentation, it is a pending requirement with nothing marking it historical. It survives the refactor, sits in the auth module, and reads as live intent. A TODO with no owner or condition. Either give it a tracking issue and a condition, or delete it.
-
 ## Anti-patterns
 
 | Pattern | Why it fails |
 | --- | --- |
 | Commented-out code | It rots and gets read as meaningful. Delete it; git remembers. |
 | `TODO` with no owner or condition | Accumulates forever. Add an issue reference or remove it. |
+| A prose comment instructing a future editor with no owner or condition | It survives the refactor and reads as live intent. Name who owns it and when it expires, or delete it. |
 | Restating the spec in a comment | The spec changes; the comment does not. |
 | Doc that describes intent, not behavior | Readers check behavior. |
 | Example that was never run | Always wrong, often subtly. |
