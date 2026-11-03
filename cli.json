@@ -9,16 +9,33 @@
   "session": {
     "scrollbar": true,
     "thinking": "hide",
-    "permissions": "prompt"
+    "permissions": "autoaccept",
+    "verbosity": "low",
+    "tps": false
   },
   "tabs": {
-    "mode": "off",
-    "indicators": "status"
+    "mode": "auto",
+    "indicators": "status",
+    "layout": "horizontal"
   },
   "attention": {
-    "notifications": true
+    "notifications": true,
+    "sound": true,
+    "volume": 0.7999999999999999
   },
   "debug": {
-    "devtools": false
+    "devtools": true
+  },
+  "prompt": {
+    "paste": "compact",
+    "image_preview": false
+  },
+  "terminal": {
+    "title": true,
+    "copy": "select"
+  },
+  "experimental": {
+    "new-designs": true,
+    "client-mcp": true
   }
 }
