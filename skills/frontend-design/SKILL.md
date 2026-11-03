@@ -140,7 +140,7 @@ node "$HOME/.config/opencode/skills/frontend-design/scripts/inspect.mjs" <url or
 node "$HOME/.config/opencode/skills/frontend-design/scripts/lint.mjs" <source files or folder>
 ```
 
-`inspect.mjs` renders in a real browser at 1440, 768 and 390, measures the floor and the craft rules — headline lines, type sizes, fonts actually loaded, contrast, overflow, equal margins, empty screens, missing headings, motion — saves screenshots to `.inspect/`, and exits 1 on any `FAIL`. `lint.mjs` scans source for banned patterns and stock phrases. Set `CHROME_PATH` when the browser is not found; on this machine Helium is `/usr/bin/helium-browser`.
+`inspect.mjs` renders in a real browser at 1440, 768 and 390, measures the floor and the craft rules — headline lines, type sizes, fonts actually loaded, contrast, overflow, equal margins, empty screens, missing headings, motion — saves screenshots to `.inspect/`, and exits 1 on any `FAIL`. It launches its own headless browser with a temporary profile: no window, no cookies, no daemon, and it exits when the run ends — browser-bridge stays the one interactive browser. `lint.mjs` scans source for banned patterns and stock phrases. Set `CHROME_PATH` when the browser is not found; on this machine Helium is `/usr/bin/helium-browser`.
 
 - Fix every `FAIL`. A `WARN` is wrong unless one sentence defends it to a designer.
 - Open every screenshot the run lists. A problem visible in a render is real whatever the code says.
