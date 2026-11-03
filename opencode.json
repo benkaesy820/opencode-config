@@ -1,8 +1,13 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "default_agent": "advisor",
+  "default_agent": "dee-mabro",
   "mcp": {
     "servers": {
+      "opencode_console": {
+        "type": "remote",
+        "url": "https://opencode.ai/console/mcp",
+        "disabled": true
+      },
       "browser-bridge": {
         "type": "local",
         "command": [
