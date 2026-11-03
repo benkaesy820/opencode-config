@@ -46,6 +46,7 @@ When a fact is expensive to rediscover, record it in that project's own `AGENTS.
 The operator picks the model; you pick the procedure. Do not pin a model in your own work, and do not spawn a subagent with a model override — a subagent inherits the session model.
 
 - **Audits, deep reviews, and root-cause analysis are delegated** to `reviewer`, read-only and with no model override. The main agent runs the verification steps it could not. Large targets become parallel reviewer slices; merge their ledgers.
+- **Delegation targets are fixed.** Work handed to a subagent goes to `dee-mabro` — it carries the capacity doctrine and the knowledge base — or to `reviewer` when the task is a check. `explore` is for finding files and code; there is no generic delegate.
 - **Implementation stays in the main session.** Write and edit code here, in the same context that read the code.
 - **Live-system work is done inline, never delegated.** Driving a running machine or an installed app (D-Bus, compositor IPC, config surgery, GUI verification) is not repo editing: the evidence is a measurement or a pixel sample rather than a second reading of the repo, and a read-only reviewer cannot execute anything.
 
