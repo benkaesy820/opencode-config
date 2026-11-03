@@ -131,7 +131,26 @@ Adapted from [unslop](https://github.com/heydamir/unslop) by Damir Sokolovsky, C
 - [ ] No looping or bouncy motion; no animated layout properties
 - [ ] Swap in another product's name — does the screen still fit? If yes, push the direction harder
 
-## 8. Work honestly
+## 8. Gate
+
+A page is not done because the checklist was read. Measure it.
+
+```sh
+node "$HOME/.config/opencode/skills/frontend-design/scripts/inspect.mjs" <url or path/to/index.html> --out .inspect
+node "$HOME/.config/opencode/skills/frontend-design/scripts/lint.mjs" <source files or folder>
+```
+
+`inspect.mjs` renders in a real browser at 1440, 768 and 390, measures the floor and the craft rules — headline lines, type sizes, fonts actually loaded, contrast, overflow, equal margins, empty screens, missing headings, motion — saves screenshots to `.inspect/`, and exits 1 on any `FAIL`. `lint.mjs` scans source for banned patterns and stock phrases. Set `CHROME_PATH` when the browser is not found; on this machine Helium is `/usr/bin/helium-browser`.
+
+- Fix every `FAIL`. A `WARN` is wrong unless one sentence defends it to a designer.
+- Open every screenshot the run lists. A problem visible in a render is real whatever the code says.
+- Re-run after each fix; three rounds at most.
+- With a build step, run the gate on the production build, not the dev server.
+- No browser or Node 22: say the gate could not run and mark the checks `Unverified`.
+
+Vendored from tasteskill v2 (MIT, © 2026 Leonxlnx); the scripts are unchanged. Its `few-pictures` advice names `assets.mjs`, which is not vendored — use the project's own photographs, or `browser-bridge` to find one.
+
+## 9. Work honestly
 
 Edit real files, not markdown mockups. Test with realistic data ("John Doe" hides truncation; long German strings expose it). Build each state as you go. Before claiming a change, verify it against the rendered result: say "added", "fixed", or "animated" only when there is a real implementation change visible in the UI, and say "inspected" when you only looked. If you cannot verify a claim, verify it or drop it.
 

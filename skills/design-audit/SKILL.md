@@ -25,6 +25,7 @@ The coverage ledger for UI: screens × states × breakpoints × input modes. Eve
 
 ## 3. Evidence instruments
 
+- **The inspector** (`frontend-design/scripts/inspect.mjs`): renders the page at 1440/768/390, measures headline lines, type sizes, loaded fonts, contrast, overflow, equal margins, empty screens and missing headings, and saves screenshots to `.inspect/`. Run it first — its measurements are the measured half of this audit. `lint.mjs` does the source scan.
 - **browser-bridge** (when available): viewport presets and custom sizes, screenshots, click-through, keyboard presses, form entry with edge data, diagnostics (console, failed requests).
 - **Static:** templates and components (which states are coded?), CSS (tokens actually in use), markup (labels, landmarks, alt text).
 - **Realistic data:** long strings, huge numbers, unicode, empty. "John Doe" hides truncation; long German strings expose it.
