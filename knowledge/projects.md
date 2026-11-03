@@ -13,6 +13,7 @@ One file per project under `projects/`. This page is the index; each file keeps 
 | phone | `projects/phone.md` | active — Samsung S21+ debloat |
 | opencode-config | `projects/opencode-config.md` | active — this configuration |
 | research-bridge | `projects/research-bridge.md` | active — local Rust MCP research server |
+| tech-sources | `projects/tech-sources.md` | reference — curated RSS/Atom feeds for `research_feed` |
 | windows retired | `projects/windows-retired.md` | historical |
 | open threads | `projects/open-threads.md` | cross-project open items |
 
